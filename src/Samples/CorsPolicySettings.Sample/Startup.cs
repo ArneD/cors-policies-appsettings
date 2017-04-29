@@ -35,7 +35,14 @@ namespace CorsPolicySettings.Sample
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseCors("Test");
+            if (env.IsDevelopment())
+            {
+                app.UseCors("AllowAll");
+            }
+            else
+            {
+                app.UseCors("Test");
+            }
             app.UseMvc();
         }
     }
