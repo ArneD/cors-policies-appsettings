@@ -1,0 +1,10 @@
+﻿{
+  "Policies": [
+    {
+      "Name": "Allow Example GET",
+      "Headers": ["*"],
+      "Methods": ["GET"],
+      "Origins": [ "http://www.example.com" ] 
+    }
+  ]
+}

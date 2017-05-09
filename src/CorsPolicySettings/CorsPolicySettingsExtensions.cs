@@ -8,10 +8,13 @@ namespace CorsPolicySettings
     {
         public static void AddCorsPolicies(this IServiceCollection serviceCollection, IConfigurationRoot configurationRoot)
         {
-            serviceCollection.AddOptions();
+            serviceCollection.AddCorsPolicies(configurationRoot.GetSection("CORSPolicies"));
+        }
 
-            var corsPolicies = configurationRoot.GetSection("CORSPolicies").Get<IEnumerable<CorsPolicySetting>>();
-            
+        public static void AddCorsPolicies(this IServiceCollection serviceCollection, IConfigurationSection configurationSection)
+        {
+            var corsPolicies = configurationSection.Get<IEnumerable<CorsPolicySetting>>();
+
             serviceCollection.AddCors(builder =>
             {
                 foreach (var corsPolicy in corsPolicies)

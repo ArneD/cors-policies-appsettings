@@ -14,6 +14,7 @@ namespace CorsPolicySettings.Sample
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("cors.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -24,6 +25,7 @@ namespace CorsPolicySettings.Sample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCorsPolicies(Configuration);
+            //services.AddCorsPolicies(Configuration.GetSection("Policies"));
 
             // Add framework services.
             services.AddMvc();
