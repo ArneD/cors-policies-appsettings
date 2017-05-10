@@ -6,7 +6,7 @@ let distDir = @"./src/web/dist"
 
 
 Target "RestorePackages" (fun _ ->
-    "./src/CorsPolicySettings.sln"
+    "./src/CorsPolicySettings/CorsPolicySettings.csproj"
         |> RestoreMSSolutionPackages (fun p ->
              { p with
                  Retries = 4 })
@@ -20,7 +20,7 @@ Target "Build" (fun _ ->
                     "ExcludeGeneratedDebugSymbol", "True"
                     "AllowedReferenceRelatedFileExtensions", "None"]
 
-    !! "./src/CorsPolicySettings.sln"
+    !! "./src/CorsPolicySettings/CorsPolicySettings.csproj"
         |> MSBuildReleaseExt tempBuildDir properties "Build"
         |> Log "Build-Output: "
 )
