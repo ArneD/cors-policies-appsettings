@@ -6,10 +6,10 @@ let distDir = @"./src/web/dist"
 
 
 Target "RestorePackages" (fun _ ->
-    "./src/CorsPolicySettings/CorsPolicySettings.csproj"
-        |> RestoreMSSolutionPackages (fun p ->
-             { p with
-                 Retries = 4 })
+    DotNetCli.Restore (fun p -> 
+            { p with 
+                 WorkingDir = "./src/CorsPolicySettings";
+                 NoCache = true })
 )
 
 Target "Build" (fun _ ->
