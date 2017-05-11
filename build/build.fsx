@@ -13,16 +13,13 @@ Target "RestorePackages" (fun _ ->
 )
 
 Target "Build" (fun _ ->
-    let properties = [                    
-                    "Optimize", "True"
-                    "DebugSymbols", "False"
-                    "DebugType", "None"
-                    "ExcludeGeneratedDebugSymbol", "True"
-                    "AllowedReferenceRelatedFileExtensions", "None"]
 
-    !! "./src/CorsPolicySettings/CorsPolicySettings.csproj"
-        |> MSBuildReleaseExt tempBuildDir properties "Build"
-        |> Log "Build-Output: "
+    DotNetCli.Build (fun p -> 
+            { p with
+                Project = "./src/CorsPolicySettings/CorsPolicySettings.csproj";
+                Framework = "netcoreapp1.1";                
+                Output = "../../" @@ tempBuildDir;
+                Configuration = "Release" })    
 )
 
 Target "Copy" (fun _ ->
