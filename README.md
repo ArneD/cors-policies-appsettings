@@ -1,6 +1,6 @@
 # Cors Policiy Settings
 
-## How to use
+## How to use ([Sample](https://github.com/ArneD/cors-policies-appsettings/tree/master/src/Samples/CorsPolicySettings.Sample))
 
 ### Default
 
@@ -57,3 +57,71 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
+### Custom
+
+In any json settings file (example: cors.json)
+```json
+{
+  "Policies": [
+    {
+      "Name": "Test",
+      "Methods": [ "GET", "POST" ],
+      "Origins": [ "http://www.example.com" ]
+    },
+    {
+      "Name": "AllowAll",
+      "Headers": ["*"],
+      "Methods": ["*"],
+      "Origins":  ["*"] 
+    }
+  ]
+}
+```
+
+Startup.cs
+
+Add you json file to the configuration builder.
+```csharp
+public Startup(IHostingEnvironment env)
+{
+    var builder = new ConfigurationBuilder()
+        .SetBasePath(env.ContentRootPath)
+        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+        .AddJsonFile("cors.json", optional: true, reloadOnChange: true)
+        .AddEnvironmentVariables();
+    Configuration = builder.Build();
+}
+```
+
+Define the section where the policies should be read.
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{    
+    //Replaces the use of services.AddCors()
+    services.AddCorsPolicies(Configuration.GetSection("Policies"));
+    
+    /// ...
+
+    // Add framework services.
+    services.AddMvc();
+
+    /// ...
+}
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{   
+    if (env.IsDevelopment())
+    {
+        app.UseCors("AllowAll");
+    }
+    else
+    {
+        app.UseCors("Test");
+    }
+
+    /// ...
+
+    app.UseMvc();
+}
+```
