@@ -19,7 +19,8 @@ Target "Build" (fun _ ->
                 Project = "./src/CorsPolicySettings/CorsPolicySettings.csproj";
                 Framework = "netstandard1.6";                
                 Output = "../../" @@ tempBuildDir;
-                Configuration = "Release" })    
+                Configuration = "Release";
+                AdditionalArgs = ["/p:VersionPrefix=1.0.1"] })    
 )
 
 Target "Copy" (fun _ ->
