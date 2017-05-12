@@ -1,7 +1,7 @@
 [![NuGet](https://img.shields.io/nuget/v/CorsPolicySettings.svg)](https://www.nuget.org/packages/CorsPolicySettings)
 [![NuGet](https://img.shields.io/nuget/dt/CorsPolicySettings.svg)](https://www.nuget.org/packages/CorsPolicySettings/)
 
-# Cors Policiy Settings
+# Cors Policy Settings
 
 ## How to use ([Sample](https://github.com/ArneD/cors-policies-appsettings/tree/master/src/Samples/CorsPolicySettings.Sample))
 
