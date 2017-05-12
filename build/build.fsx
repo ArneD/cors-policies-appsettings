@@ -17,7 +17,7 @@ Target "Build" (fun _ ->
     DotNetCli.Build (fun p -> 
             { p with
                 Project = "./src/CorsPolicySettings/CorsPolicySettings.csproj";
-                Framework = "netcoreapp1.1";                
+                Framework = "netstandard1.6";                
                 Output = "../../" @@ tempBuildDir;
                 Configuration = "Release" })    
 )
