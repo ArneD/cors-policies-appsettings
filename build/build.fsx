@@ -20,7 +20,7 @@ Target "Build" (fun _ ->
                 Framework = "netstandard1.6";                
                 Output = "../../" @@ tempBuildDir;
                 Configuration = "Release";
-                AdditionalArgs = ["/p:VersionPrefix=1.0.2"] })    
+                AdditionalArgs = ["/p:VersionPrefix=1.0.3"] })    
 )
 
 Target "Copy" (fun _ ->
