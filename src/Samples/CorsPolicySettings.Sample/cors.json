@@ -4,7 +4,7 @@
       "Name": "Allow Example GET",
       "Headers": ["*"],
       "Methods": ["GET"],
-      "Origins": [ "http://www.example.com" ] 
+      "Origins": [ "http://www.example.com" ]
     }
   ]
 }
