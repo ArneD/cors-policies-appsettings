@@ -17,10 +17,10 @@ Target "Build" (fun _ ->
     DotNetCli.Build (fun p -> 
             { p with
                 Project = "./src/CorsPolicySettings/CorsPolicySettings.csproj";
-                Framework = "netstandard1.6";                
+                Framework = "netstandard2.0";                
                 Output = "../../" @@ tempBuildDir;
                 Configuration = "Release";
-                AdditionalArgs = ["/p:VersionPrefix=1.0.3"] })    
+                AdditionalArgs = ["/p:VersionPrefix=2.0.0"] })    
 )
 
 Target "Copy" (fun _ ->
